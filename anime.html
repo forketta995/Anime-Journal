@@ -1,0 +1,112 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Journal by Forketta & Pigna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <script src="navbar.js"></script>
+    <main class="container">
+        <h1>Elenco Anime</h1>
+        <p>In questa sezione troverete gli anime che abbiamo visto/stiamo vedendo nella nostra rubrica!</p>
+        
+        <ul id="anime-list" class="anime-grid">
+            </ul>
+    </main>
+
+    <script>
+        function replaceSeason(season) {
+            const seasons = {
+                "WINTER": "Inverno 20",
+                "SPRING": "Primavera 20",
+                "SUMMER": "Estate 20",
+                "FALL": "Autunno 20"
+            };
+            // Rimpiazza nella stringa la stagione con la sua traduzione, se presente
+            for (const [key, value] of Object.entries(seasons)) {
+                season = season.replace(key, value);
+            }
+            return season;
+        }
+        async function loadAnime() {
+            try {
+                const response = await fetch('data/anime.json');
+                const data = await response.json();
+                const listElement = document.getElementById('anime-list');
+
+                const animeArray = Object.entries(data).map(([id, info]) => {
+                    let totalSum = 0;
+                    let totalCount = 0;
+                    let htmlVoti = "";
+
+                    if (info.voti) {
+                        const utenti = Object.keys(info.voti);
+                        const numeroVoti = info.voti[utenti[0]].length;
+
+                        if (numeroVoti > 1 && info["voti-note"]) {
+                            let righeMomenti = [];
+                            info["voti-note"].forEach((nota, idx) => {
+                                let votiMomento = [];
+                                utenti.forEach(u => {
+                                    const v = info.voti[u][idx];
+                                    if (v !== undefined) {
+                                        votiMomento.push(`${u} ${v}`);
+                                        totalSum += v;
+                                        totalCount++;
+                                    }
+                                });
+                                righeMomenti.push(`<div><strong>${nota}:</strong> ${votiMomento.join(' | ')}</div>`);
+                            });
+                            htmlVoti = righeMomenti.join('');
+                        } 
+                        else {
+                            let votiSemplici = [];
+                            utenti.forEach(u => {
+                                const v = info.voti[u][0]; 
+                                if (v !== undefined) {
+                                    votiSemplici.push(`${u}: ${v}`);
+                                    totalSum += v;
+                                    totalCount++;
+                                }
+                            });
+                            htmlVoti = `<div>${votiSemplici.join(' | ')}</div>`;
+                        }
+                    }
+
+                    const media = totalCount > 0 ? (totalSum / totalCount).toFixed(1) : 0;
+
+                    return { id, info, media: parseFloat(media), htmlVoti };
+                });
+
+                animeArray.sort((a, b) => b.media - a.media);
+
+                listElement.innerHTML = animeArray.map(item => `
+                    <li class="anime-card">
+                        <div class="score-badge">${item.media > 0 ? item.media : '-'}</div>
+                        <div class="anime-info">
+                            <div class="anime-header">
+                                <strong>${item.info.title}</strong>
+                                ${item.info.note ? `<span class="tag-note">${item.info.note}</span>` : ''}
+                            </div>
+                            <div class="momenti-container">
+                                ${item.htmlVoti || '<i>Nessun voto pervenuto</i>'}
+                            </div>
+                            <div class="anime-footer">
+                                <small>Stagioni: ${replaceSeason(item.info.season) || 'N/A'}</small>
+                                <a href="https://anilist.co/anime/${item.id}" target="_blank">AniList</a>
+                            </div>
+                        </div>
+                    </li>
+                `).join('');
+
+            } catch (error) {
+                console.error("Errore:", error);
+            }
+        }
+
+        loadAnime();
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+{
+    "176301": {
+        "title": "Il monologo della speziale - Stagione 2",
+        "note": "(Solo Cour 2)",
+        "voti": {
+            "Forketta": [ 8.2 ],
+            "pigna": [ 8 ]
+        },
+        "season": "SPRING25"
+    },
+    "180675": {
+        "title": "Apocalypse Hotel",
+        "voti": {
+            "Forketta": [ 8 ],
+            "pigna": [ 8.3 ]
+        },
+        "season": "SPRING25"
+    },
+    "184639": {
+        "title": "Anne Shirley",
+        "voti": {
+            "Forketta": [ 7.5, 7.5 ],
+            "pigna": [ 7.5, 8 ]
+        },
+        "voti-note": ["Cour 1", "Cour 2"],
+        "season": "SPRING25/SUMMER25"
+    },
+    "177476": {
+        "title": "YAIBA: Samurai Legend",
+        "note":"(Solo Cour 1)",
+        "voti": {
+            "Forketta": [ 7.1 ],
+            "pigna": [ 7 ]
+        },
+        "season": "SPRING25"
+    },
+    "167336": {
+        "title": "LAZARUS",
+        "voti": {
+            "Forketta": [ 4.5 ],
+            "pigna": [ 4.3 ]
+        },
+        "season": "SPRING25"
+    },
+    "174802": {
+        "title": "The Shiunji Family Children",
+        "voti": {
+            "Forketta": [ 7.5 ],
+            "pigna": [ 6.5 ]
+        },
+        "season": "SPRING25"
+    },
+    "185213": {
+        "title": "Mobile Suit Gundam GQuuuuuuX",
+        "voti": {
+            "Forketta": [ 6.5 ],
+            "pigna": [ 9 ]
+        },
+        "season": "SPRING25"
+    },
+    "179965": {
+        "title": "Please Put Them On, Takamine-san",
+        "voti": {
+            "Forketta": [ 4.8 ],
+            "pigna": [ 4 ]
+        },
+        "season": "SPRING25"
+    },
+
+    "154768": {
+        "title": "My Dress-Up Darling - Stagione 2",
+        "voti": {
+            "Forketta": [ 8.1 ],
+            "pigna": [ 8.4 ]
+        },
+        "season": "SUMMER25"
+    },
+    "177689": {
+        "title": "The Summer Hikaru Died",
+        "voti": {
+            "Forketta": [ 7 ],
+            "pigna": [ 7.8 ]
+        },
+        "season": "SUMMER25"
+    },
+    "179966": {
+        "title": "Secrets of the Silent Witch",
+        "voti": {
+            "Forketta": [ 7 ],
+            "pigna": [ 7.5 ]
+        },
+        "season": "SUMMER25"
+    },
+    "171046": {
+        "title": "Rascal Does Not Dream of Santa Claus",
+        "voti": {
+            "Forketta": [ 7.5 ],
+            "pigna": [ 8 ]
+        },
+        "season": "SUMMER25"
+    },
+    "182309": {
+        "title": "Grand Blue Dreaming - Stagione 2",
+        "voti": {
+            "Forketta": [ 7 ],
+            "pigna": [ 7.8 ]
+        },
+        "season": "SUMMER25"
+    },
+    "184591": {
+        "title": "There's No Freaking Way I'll Be Your Lover, Unless...",
+        "voti": {
+            "Forketta": [ 5.8 ],
+            "pigna": [ 6.8 ]
+        },
+        "season": "SUMMER25"
+    },
+    "181841": {
+        "title": "CITY THE ANIMATION",
+        "voti": {
+            "Forketta": [ 8.4 ],
+            "pigna": [ 8.7 ]
+        },
+        "season": "SUMMER25"
+    },
+    "180929": {
+        "title": "Ruri Rocks",
+        "voti": {
+            "Forketta": [ 6.1 ],
+            "pigna": [ 7.4 ]
+        },
+        "season": "SUMMER25"
+    },
+    "177937": {
+        "title": "SPY x FAMILY - Stagione 3",
+        "voti": {
+            "Forketta": [ 7.2 ],
+            "pigna": [ 7.7 ]
+        },
+        "season": "FALL25"
+    },
+    "179302": {
+        "title": "SANDA",
+        "voti": {
+            "Forketta": [ 7.5 ],
+            "pigna": [ 8 ]
+        },
+        "season": "FALL25"
+    },
+    "183385": {
+        "title": "This Monster Wants to Eat Me",
+        "voti": {
+            "Forketta": [ 5.5 ],
+            "pigna": [ 6.8 ]
+        },
+        "season": "FALL25"
+    },
+    "195153": {
+        "title": "Dusk Beyond the End of the World",
+        "voti": {
+            "Forketta": [ 4.2 ],
+            "pigna": [ 4.4 ]
+        },
+        "season": "FALL25"
+    },
+    "185731": {
+        "title": "Ranma 1/2 (2024) - Stagione 2",
+        "voti": {
+            "Forketta": [ 9.3 ],
+            "pigna": [ 7.8 ]
+        },
+        "season": "FALL25"
+    },
+    "186920": {
+        "title": "Touring After the Apocalypse",
+        "voti": {
+            "Forketta": [ 6.1 ],
+            "pigna": [ 7.1 ]
+        },
+        "season": "FALL25"
+    }
+
+}

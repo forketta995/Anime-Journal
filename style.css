@@ -1,0 +1,130 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    color: #333;
+}
+
+.navbar {
+    background: #2c3e50;
+    padding: 1rem;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.navbar a.active { color: #3498db; }
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.anime-grid {
+    list-style: none;
+    padding: 0;
+}
+
+.anime-card {
+    background: white;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.id-badge {
+    background: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 15px;
+}
+
+.anime-info a {
+    display: block;
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: none;
+}
+
+.anime-info a:hover { color: #3498db; }
+
+.score-badge {
+    background: #e67e22; /* Un bel color arancione "voto" */
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 50%;
+    min-width: 40px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.votes-list {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+small {
+    color: #7f8c8d;
+    font-weight: normal;
+}
+
+/* Navbar */
+.navbar {
+    background: #2c3e50;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar a, .dropbtn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover { background-color: #f1f1f1; border-radius: 4px; }
+
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropbtn { color: #3498db; }
