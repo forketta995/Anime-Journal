@@ -5,21 +5,6 @@ body {
     color: #333;
 }
 
-.navbar {
-    background: #2c3e50;
-    padding: 1rem;
-    text-align: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-.navbar a.active { color: #3498db; }
-
 .container {
     max-width: 800px;
     margin: 40px auto;
@@ -41,13 +26,41 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.id-badge {
-    background: #3498db;
-    color: white;
-    padding: 5px 10px;
+.anime-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.tag-note {
+    font-size: 0.75rem;
+    background: #ecf0f1;
+    padding: 2px 8px;
     border-radius: 4px;
-    font-size: 0.8rem;
-    margin-right: 15px;
+    color: #7f8c8d;
+}
+
+.momenti-container {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: #fdfdfd;
+    padding: 8px;
+    border-left: 3px solid #3498db;
+    margin: 10px 0;
+}
+
+.anime-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+}
+
+.anime-info {
+    width: 100%;
 }
 
 .anime-info a {
@@ -60,7 +73,7 @@ body {
 .anime-info a:hover { color: #3498db; }
 
 .score-badge {
-    background: #e67e22; /* Un bel color arancione "voto" */
+    background: #e67e22;
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
@@ -71,19 +84,11 @@ body {
     margin-right: 15px;
 }
 
-.votes-list {
-    margin: 5px 0;
-    font-size: 0.85rem;
-    color: #666;
-    font-style: italic;
-}
-
 small {
     color: #7f8c8d;
     font-weight: normal;
 }
 
-/* Navbar */
 .navbar {
     background: #2c3e50;
     padding: 10px;
@@ -128,3 +133,54 @@ small {
 
 .dropdown:hover .dropdown-content { display: block; }
 .dropdown:hover .dropbtn { color: #3498db; }
+
+.filter-section {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#sort-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#sort-select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-section input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.search-section input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+[v-cloak] { display: none; }
+
+.anime-details {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 5px 0;
+}

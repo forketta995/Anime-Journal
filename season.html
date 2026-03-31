@@ -5,114 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archivio Stagionale - Anime Journal</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <script src="navbar.js"></script>
-
-    <main class="container">
-        <h1 id="page-title">Caricamento stagione...</h1>
-        <p id="page-description"></p>
-        
-        <ul id="anime-list" class="anime-grid">
+    <div id="app" v-cloak>
+        <navbar-component></navbar-component>
+        <main class="container">
+            <h1>{{ titleSeason }}</h1>
+            <div class="filter-section">
+                <label>Ordina per:</label>
+                <select v-model="sortBy">
+                    <option value="media">Media Generale</option>
+                    <option value="Forketta">Voto Forketta</option>
+                    <option value="pigna">Voto Pigna</option>
+                </select>
+            </div>
+            <ul class="anime-grid">
+                <li v-for="item in sortedSeasonAnime" :key="item.id" class="anime-card">
+                    <div class="score-badge">{{ item.media || '-' }}</div>
+                    <div class="anime-info">
+                        <div class="anime-header">
+                            <strong>{{ item.info.title }}</strong>
+                            <span v-if="item.info.note" class="tag-note">{{ item.info.note }}</span>
+                        </div>
+                        <div class="momenti-container">
+                            <span v-if="item.notaCour"><strong>{{ item.notaCour }}:</strong> </span>
+                            {{ item.votiTesto || 'Nessun voto' }}
+                        </div>
+                        <div class="anime-footer">
+                            <a :href="'https://anilist.co/anime/' + item.id" target="_blank">AniList</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
-    </main>
-
-    <script>
-        function translateSeason(s) {
-            const translations = { "WINTER": "Inverno", "SPRING": "Primavera", "SUMMER": "Estate", "FALL": "Autunno" };
-            return translations[s] || s;
-        }
-
-        async function loadSeasonData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const year = urlParams.get('year'); 
-            const season = urlParams.get('season'); 
-
-            if (!year || !season) {
-                document.getElementById('page-title').innerText = "Stagione non specificata";
-                return;
-            }
-
-            const yearShort = year.slice(-2);
-            const matchTarget = season + yearShort;
-
-            document.getElementById('page-title').innerText = `${translateSeason(season)} ${year}`;
-            document.getElementById('page-description').innerText = `Tutti gli anime seguiti durante ${translateSeason(season).toLowerCase()} del ${year}.`;
-
-            try {
-                const response = await fetch('data/anime.json');
-                const data = await response.json();
-                const listElement = document.getElementById('anime-list');
-
-                const filteredAnime = Object.entries(data)
-                    .filter(([id, info]) => info.season && info.season.includes(matchTarget))
-                    .map(([id, info]) => {
-                        
-                        const seasonParts = info.season.split('/');
-                        const seasonIndex = seasonParts.indexOf(matchTarget);
-
-                        let displayVoteHTML = "";
-                        let currentMedia = 0;
-
-                        if (info.voti && seasonIndex !== -1) {
-                            let votiEstraiti = [];
-                            let sum = 0;
-                            let count = 0;
-
-                            Object.entries(info.voti).forEach(([utente, listaVoti]) => {
-                                const votoSingolo = listaVoti[seasonIndex];
-                                if (votoSingolo !== undefined) {
-                                    votiEstraiti.push(`${utente}: ${votoSingolo}`);
-                                    sum += votoSingolo;
-                                    count++;
-                                }
-                            });
-
-                            currentMedia = count > 0 ? (sum / count).toFixed(1) : 0;
-                            
-                            const notaCour = (info["voti-note"] && info["voti-note"][seasonIndex]) 
-                                            ? info["voti-note"][seasonIndex] 
-                                            : null;
-
-                            displayVoteHTML = `
-                                <div class="momenti-container">
-                                    ${notaCour ? `<strong>${notaCour}:</strong> ` : ''}
-                                    ${votiEstraiti.join(' | ')}
-                                </div>`;
-                        }
-
-                        return { id, info, media: currentMedia, html: displayVoteHTML };
-                    });
-
-                filteredAnime.sort((a, b) => b.media - a.media);
-
-                if (filteredAnime.length === 0) {
-                    listElement.innerHTML = "<li>Nessun anime trovato per questa stagione.</li>";
-                } else {
-                    listElement.innerHTML = filteredAnime.map(item => `
-                        <li class="anime-card">
-                            <div class="score-badge">${item.media > 0 ? item.media : '-'}</div>
-                            <div class="anime-info">
-                                <div class="anime-header">
-                                    <strong>${item.info.title}</strong>
-                                    ${item.info.note ? `<span class="tag-note">${item.info.note}</span>` : ''}
-                                </div>
-                                ${item.html}
-                                <div class="anime-footer">
-                                    <a href="https://anilist.co/anime/${item.id}" target="_blank">AniList</a>
-                                </div>
-                            </div>
-                        </li>
-                    `).join('');
-                }
-
-            } catch (error) {
-                console.error("Errore:", error);
-                listElement.innerHTML = "<li>Errore nel caricamento dei dati.</li>";
-            }
-        }
-
-        loadSeasonData();
-    </script>
+        </main>
+    </div>
+    <script src="js/logic.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

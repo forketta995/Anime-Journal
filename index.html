@@ -1,12 +1,21 @@
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Journal by Forketta & Pigna</title>
+    <title>TO-DO - Anime Journal</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-
-   <script src="navbar.js"></script>
-    </body>
+    <div id="app" v-cloak>
+        <navbar-component></navbar-component>
+        <main class="container">
+            <h1>TO-DO</h1>
+        </main>
+    </div>
+    <script src="js/logic.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
