@@ -9,6 +9,8 @@ const app = createApp({
             animeRaw: {},
             searchQuery: '',
             sortBy: 'media',
+            selectedYearFilter: 'all', 
+            availableYears: [],        
             year: '',
             season: ''
         }
@@ -29,6 +31,7 @@ const app = createApp({
                             if (typeof v === 'number') {
                                 totalSum += v;
                                 totalCount++;
+                                
                                 if (userSums[user] === undefined) {
                                     userSums[user] = 0;
                                     userCounts[user] = 0;
@@ -45,7 +48,7 @@ const app = createApp({
                 });
 
                 const votiTesto = Object.entries(userScores)
-                    .filter(([u, v]) => v > 0) 
+                    .filter(([u, v]) => v > 0)
                     .map(([u, v]) => `${u}: ${v}`)
                     .join(' | ');
 
@@ -53,15 +56,36 @@ const app = createApp({
                     id,
                     info,
                     globalMedia: totalCount > 0 ? parseFloat((totalSum / totalCount).toFixed(1)) : 0,
-                    userScores, 
-                    votiTesto   
+                    userScores,
+                    votiTesto
                 };
             });
+
+            if (this.selectedYearFilter !== 'all') {
+                const yrStr = this.selectedYearFilter; 
+                const yrShort = yrStr.slice(-2);      
+                
+                const nextYrShort = (parseInt(yrStr) + 1).toString().slice(-2); 
+
+                const validTargets = [
+                    `SPRING${yrShort}`, 
+                    `SUMMER${yrShort}`, 
+                    `FALL${yrShort}`, 
+                    `WINTER${nextYrShort}`
+                ];
+
+                entries = entries.filter(item => {
+                    if (!item.info.season) return false;
+                    const parts = item.info.season.split('/');
+                    return parts.some(p => validTargets.includes(p));
+                });
+            }
 
             if (this.searchQuery) {
                 const q = this.searchQuery.toLowerCase();
                 entries = entries.filter(item => item.info.title.toLowerCase().includes(q));
             }
+
             return entries.sort((a, b) => {
                 if (this.sortBy === 'media') return b.globalMedia - a.globalMedia;
                 
@@ -70,6 +94,7 @@ const app = createApp({
                 return scoreB - scoreA;
             });
         },
+        
         titleSeason() { 
             return this.season ? `${AnimeUtils.translateSeason(this.season)} ${this.year}` : 'Caricamento...'; 
         },
@@ -102,9 +127,14 @@ const app = createApp({
         this.season = params.get('season') || '';
         
         try {
-            const res = await fetch('data/anime.json');
-            this.animeRaw = await res.json();
+            const resAnime = await fetch('data/anime.json');
+            this.animeRaw = await resAnime.json();
+            const resSeasons = await fetch('data/seasons.json');
+            const dataSeasons = await resSeasons.json();
+            this.availableYears = dataSeasons.lista.map(obj => Object.keys(obj)[0]);
+
         } catch (e) {
+            console.error("Errore nel caricamento dei dati:", e);
         }
     }
 });
