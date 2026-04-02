@@ -212,7 +212,7 @@ const app = createApp({
             return '';
         },
 
-        ggetCumulativeF1(user) {
+        getCumulativeF1(user) {
             if (!this.isWeeklyMode || !this.weeklyDataRaw) return [];
             
             const pointsMap = {};
