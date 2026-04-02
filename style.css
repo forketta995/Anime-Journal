@@ -184,3 +184,102 @@ small {
     color: #666;
     margin: 5px 0;
 }
+
+/* Navigazione Settimanale */
+.week-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.week-navbar button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.week-navbar button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.week-navbar select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.f1-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.f1-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.f1-card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.f1-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.f1-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.f1-rank {
+    font-weight: bold;
+    width: 30px;
+    color: #7f8c8d;
+}
+
+.f1-title {
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+.trend { font-size: 0.85rem; font-weight: bold; min-width: 35px; text-align: right; }
+.trend-up { color: #2ecc71; }
+.trend-down { color: #e74c3c; }
+.trend-new { color: #f39c12; font-size: 0.75rem; }
+.trend-flat { color: #95a5a6; }
+
+.f1-points {
+    font-weight: bold;
+    color: #e67e22;
+    background: #fdf3e8;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .f1-dashboard { grid-template-columns: 1fr; }
+}

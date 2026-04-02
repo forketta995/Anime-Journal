@@ -12,32 +12,90 @@
         <navbar-component></navbar-component>
         <main class="container">
             <h1>{{ titleSeason }}</h1>
-            <div class="filter-section">
-                <label>Ordina per:</label>
-                <select v-model="sortBy">
-                    <option value="media">Media Generale</option>
-                    <option value="Forketta">Voto Forketta</option>
-                    <option value="pigna">Voto Pigna</option>
+            
+            <div class="week-navbar" v-if="availableWeeks.length > 0">
+                <button @click="navigateWeek(-1)" :disabled="selectedNav === 'voti' || selectedNav === 1">Prev</button>
+                <select v-model="selectedNav" @change="handleNavChange">
+                    <option value="voti">Voti Finali</option>
+                    <option v-for="w in availableWeeks" :value="w">Settimana {{ w }}</option>
                 </select>
+                <button @click="navigateWeek(1)" :disabled="selectedNav === maxWeek">Next</button>
             </div>
-            <ul class="anime-grid">
-                <li v-for="item in sortedSeasonAnime" :key="item.id" class="anime-card">
-                    <div class="score-badge">{{ item.media || '-' }}</div>
-                    <div class="anime-info">
-                        <div class="anime-header">
-                            <strong>{{ item.info.title }}</strong>
-                            <span v-if="item.info.note" class="tag-note">{{ item.info.note }}</span>
+
+            <div v-if="!isWeeklyMode">
+                <div class="filter-section">
+                    <label>Ordina per:</label>
+                    <select v-model="sortBy">
+                        <option value="media">Media Generale</option>
+                        <option value="Forketta">Voto Forketta</option>
+                        <option value="pigna">Voto Pigna</option>
+                    </select>
+                </div>
+                <ul class="anime-grid">
+                    <li v-for="item in sortedSeasonAnime" :key="item.id" class="anime-card">
+                        <div class="score-badge">{{ item.media || '-' }}</div>
+                        <div class="anime-info">
+                            <div class="anime-header">
+                                <strong>{{ item.info.title }}</strong>
+                                <span v-if="item.info.note" class="tag-note">{{ item.info.note }}</span>
+                            </div>
+                            <div class="momenti-container">
+                                <span v-if="item.notaCour"><strong>{{ item.notaCour }}:</strong> </span>
+                                {{ item.votiTesto || 'Nessun voto' }}
+                            </div>
+                            <div class="anime-footer">
+                                <a :href="'https://anilist.co/anime/' + item.id" target="_blank">AniList</a> <small>ID #{{ item.id }}</small>
+                            </div>
                         </div>
-                        <div class="momenti-container">
-                            <span v-if="item.notaCour"><strong>{{ item.notaCour }}:</strong> </span>
-                            {{ item.votiTesto || 'Nessun voto' }}
-                        </div>
-                        <div class="anime-footer">
-                            <a :href="'https://anilist.co/anime/' + item.id" target="_blank">AniList</a> | <small>ID #{{ item.id }}</small>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div v-else class="f1-dashboard">
+                <div class="f1-card">
+                    <h2>Weekly: Forketta <span>W{{ selectedNav }}</span></h2>
+                    <ul class="f1-list">
+                        <li v-for="(anime, idx) in weeklyForketta" :key="anime.id">
+                            <span class="f1-rank">{{ idx + 1 }}</span>
+                            <span class="f1-title">{{ getAnimeTitle(anime.id) }}</span>
+                            <span class="trend" :class="getTrendClass(anime.trend)">{{ formatTrend(anime.trend) }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="f1-card">
+                    <h2>Weekly: Pigna <span>W{{ selectedNav }}</span></h2>
+                    <ul class="f1-list">
+                        <li v-for="(anime, idx) in weeklyPigna" :key="anime.id">
+                            <span class="f1-rank">{{ idx + 1 }}</span>
+                            <span class="f1-title">{{ getAnimeTitle(anime.id) }}</span>
+                            <span class="trend" :class="getTrendClass(anime.trend)">{{ formatTrend(anime.trend) }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="f1-card">
+                    <h2>F1 Standings: Forketta <span>🏆</span></h2>
+                    <ul class="f1-list">
+                        <li v-for="(anime, idx) in cumulativeForketta" :key="anime.id">
+                            <span class="f1-rank">{{ idx + 1 }}</span>
+                            <span class="f1-title">{{ getAnimeTitle(anime.id) }}</span>
+                            <span class="f1-points">{{ anime.points }} pt</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="f1-card">
+                    <h2>F1 Standings: Pigna <span>🏆</span></h2>
+                    <ul class="f1-list">
+                        <li v-for="(anime, idx) in cumulativePigna" :key="anime.id">
+                            <span class="f1-rank">{{ idx + 1 }}</span>
+                            <span class="f1-title">{{ getAnimeTitle(anime.id) }}</span>
+                            <span class="f1-points">{{ anime.points }} pt</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </main>
     </div>
     <script src="js/logic.js"></script>
